@@ -1,0 +1,39 @@
+<table class="calendar-view-week">
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let day of weekDays; index as i">
+        {{ day }} {{ monthDays[i].getDate() }}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody cdkDropListGroup>
+    <tr *ngFor="let timeSlot of timeSlots">
+      <td [width]="10" class="calendar-slot-cell">
+        <span>{{ timeSlot }}</span>
+      </td>
+
+      <td
+        *ngFor="let day of weekDays; index as i"
+        cdkDropList
+        (cdkDropListDropped)="drop($event, monthDays[i], timeSlot)"
+        [cdkDropListData]="appointments"
+      >
+        <div (click)="selectDate(monthDays[i], timeSlot)" class="cell-overlay" tabindex="0"></div>
+        <div
+          *ngFor="let appointment of getAppointmentsForDateTime(monthDays[i],timeSlot)"
+          tabindex="0"
+          class="appointment"
+          cdkDrag
+          cdkDragHandle
+          [cdkDragData]="appointment"
+          [ngStyle]="{ 'background-color': appointment.color }"
+          (click)="editAppointment(appointment, $event)"
+        >
+          <span>{{ appointment.title }}</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

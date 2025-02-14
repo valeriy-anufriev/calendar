@@ -1,0 +1,21 @@
+.dialog-content {
+  padding: 30px 30px 20px;
+
+  .form-field {
+    width: 100%;
+  }
+
+  .error {
+    color: red;
+  }
+}
+
+.mat-mdc-dialog-content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.mat-mdc-dialog-actions {
+  column-gap: 6px;
+}

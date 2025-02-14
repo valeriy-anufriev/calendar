@@ -1,0 +1,56 @@
+<div class="container" cdkDropListGroup>
+  <div *ngIf="currentView$ | async as currentView" class="calendar-container">
+    <div class="calendar-header">
+      <div *ngIf="viewDate$ | async as viewDate">
+        <h2 *ngIf="currentView === CalendarView.Month || currentView === CalendarView.Week" class="calendar-month">
+          {{ viewDate | date : "MMMM" }}
+
+          <span>{{ viewDate | date : "y" }}</span>
+        </h2>
+
+        <h2 *ngIf="currentView === CalendarView.Day" class="calendar-month">
+          {{ viewDate | date : "d MMMM" }}
+
+          <span>{{ viewDate | date : "y" }}</span>
+        </h2>
+
+        <span *ngIf="currentView === CalendarView.Day" class="calendar-dayname">{{ viewDate | date : "EEEE" }}</span>
+      </div>
+
+      <mat-button-toggle-group
+        class="calendar-view-toggle"
+        name="currentView"
+        (change)="switchToView($event.value)"
+        aria-label="Calendar-View"
+      >
+        <mat-button-toggle routerLink="month" [checked]="currentView === CalendarView.Month" [value]="CalendarView.Month">
+          Month
+        </mat-button-toggle>
+
+        <mat-button-toggle routerLink="week" [checked]="currentView === CalendarView.Week" [value]="CalendarView.Week">
+          Week
+        </mat-button-toggle>
+
+        <mat-button-toggle routerLink="day" [checked]="currentView === CalendarView.Day" [value]="CalendarView.Day">
+          Day
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <div class="calendar-controls">
+        <button mat-icon-button (click)="previous()">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+
+        <button mat-stroked-button (click)="viewToday()">Today</button>
+
+        <button mat-icon-button (click)="next()">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+
+        <button mat-flat-button (click)="selectDate()">Add Appointment</button>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

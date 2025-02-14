@@ -1,0 +1,28 @@
+<table class="calendar-view-day">
+  <tbody cdkDropListGroup>
+    <tr *ngFor="let slot of timeSlots">
+      <td [width]="10" class="calendar-slot-cell">
+        <span>{{ slot }}</span>
+      </td>
+      <td
+        cdkDropList
+        (cdkDropListDropped)="drop($event, monthDays[0], slot)"
+        [cdkDropListData]="appointments"
+      >
+        <div (click)="selectDate(monthDays[0], slot)" class="cell-overlay" tabindex="0"></div>
+        <div
+          *ngFor="let appointment of getAppointmentsForDateTime(monthDays[0], slot)"
+          tabindex="0"
+          class="appointment"
+          cdkDrag
+          cdkDragHandle
+          [cdkDragData]="appointment"
+          [ngStyle]="{ 'background-color': appointment.color }"
+          (click)="editAppointment(appointment, $event)"
+        >
+          <span>{{ appointment.title }}</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

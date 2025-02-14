@@ -1,0 +1,54 @@
+:host {
+  width: 100%;
+}
+
+.calendar-view-day {
+  margin-top: 1rem;
+  width: 100%;
+  border-spacing: 0;
+
+  tr {
+    &:first-child {
+      td {
+        border-top: 1px solid #ddd;
+      }
+    }
+
+    td {
+      position: relative;
+      border-bottom: 1px solid #ddd;
+      height: 50px;
+      padding: 3px 0;
+
+      &.calendar-slot-cell {
+        font-size: 12px;
+        font-weight: 100;
+        border-right: 1px solid #ddd;
+        padding-right: 5px;
+        vertical-align: top;
+
+        span {
+          position: relative;
+          top: -12px;
+          background: #fff;
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+
+    &:last-child {
+      td {
+        border-bottom: none;
+
+        &.calendar-slot-cell {
+          border-right: none;
+        }
+
+        .cell-overlay {
+          display: none;
+        }
+      }
+    }
+  }
+}

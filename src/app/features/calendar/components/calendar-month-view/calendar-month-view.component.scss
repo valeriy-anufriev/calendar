@@ -1,0 +1,48 @@
+:host {
+  width: 100%;
+}
+
+.calendar-view-month {
+  table-layout: fixed;
+  margin-top: 1rem;
+  width: 100%;
+  border-spacing: 0;
+
+  thead {
+    th {
+      font-size: 22px;
+      font-weight: 100;
+      text-align: right;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        &:first-child {
+          border-left: 1px solid #ddd;
+        }
+        vertical-align: top;
+        position: relative;
+        border-right: 1px solid #ddd;
+        height: 150px;
+        border-bottom: 1px solid #ddd;
+        padding: 3px 0;
+        &.selected {
+          background-color: #bbdefb;
+        }
+
+        &.today {
+          background-color: #e3f2fd;
+        }
+        .date {
+          text-align: right;
+          font-size: 22px;
+          font-weight: 100;
+          padding: 5px 10px 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<table class="calendar-view-month">
+  <thead>
+    <tr>
+      <th *ngFor="let day of weekDays">{{ day }}</th>
+    </tr>
+  </thead>
+
+  <tbody cdkDropListGroup>
+    <tr *ngFor="let week of weeks">
+      <td
+        *ngFor="let date of week"
+        cdkDropList
+        (cdkDropListDropped)="drop($event, date)"
+        [cdkDropListData]="appointments"
+        [class.today]="date | isToday"
+      >
+        <div (click)="selectDate(date)" class="cell-overlay" tabindex="0"></div>
+        <div class="date">{{ date.getDate() }}</div>
+        <div class="appointments">
+          <ng-container *ngFor="let appointment of appointments">
+            <div
+              tabindex="0"
+              *ngIf="appointment.date | isSameDate : date"
+              class="appointment"
+              cdkDrag
+              cdkDragHandle
+              [cdkDragData]="appointment"
+              [ngStyle]="{ 'background-color': appointment.color }"
+              (click)="editAppointment(appointment, $event)"
+            >
+              <span>{{ appointment.title }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
